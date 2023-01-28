@@ -49,7 +49,7 @@ nav{
 
 nav input[type = text]{
     width: min(75vw, 45rem);
-    height: 4rem;
+    height: 3.5rem;
     margin-bottom: 1rem;
 }
 
@@ -66,19 +66,22 @@ section{
     background-color:var(--secondary-light-color);
     color: #000;
     width: min(75vw, 45rem);
-    height: 4rem;
+    height: 3.5rem;
     overflow-wrap: break-word;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding-inline: 1rem;
-    border: 2px solid #333;
     
 }
 
 .new-dlt-btn{
     height: 1rem;
     width: 1rem;
+}
+
+.new-dlt-btn:hover{
+    cursor: pointer;
 }
 
 #todo-field{
