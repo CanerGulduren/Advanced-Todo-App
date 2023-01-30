@@ -90,7 +90,7 @@ section{
 
 .hide{
     animation-name: hide;
-    animation-duration: .3s;
+    animation-duration: .4s;
     animation-iteration-count: 1;
     animation-timing-function: ease;
     animation-direction:alternate;
@@ -107,5 +107,6 @@ section{
         opacity: 0;
         margin: 0;
         padding: 0;
+        display: none;
     }
 }

@@ -1,6 +1,11 @@
 const txtArea = document.getElementById("text-box");
 const todoField = document.getElementById("todo-field");
 const form = document.getElementById("todo-form");
+const template = document.querySelector("template");
+const LOCAL_STORAGE_KEY = "TODO_LIST";
+
+const STORE = loadTodo();
+STORE.forEach(newTodo);
 
 form.addEventListener("submit", createTodo);
 
@@ -8,31 +13,34 @@ function createTodo(e) {
   e.preventDefault();
 
   /*Stop if no string enter*/
-  let txtAreaValue = txtArea.value;
-  let todoText = txtAreaValue.trim();
+  let txtValue = txtArea.value;
+  let todoText = txtValue.trim();
   if (todoText.length === 0) {
     return;
   }
-
-  newTodo();
+  newTodo(txtValue);
+  STORE.push(txtValue);
+  saveTodo();
   deleteTodo();
 }
 
-function newTodo() {
-  /*New delete button*/
-  let createNewDltBtn = new Image();
-  createNewDltBtn.src = "img/reject.png";
-  createNewDltBtn.classList.add("new-dlt-btn");
-
-  /*New li*/
-  let createNewTodo = document.createElement("li");
-  let newTodoInfo = txtArea.value;
-  createNewTodo.innerHTML = newTodoInfo;
-  createNewTodo.classList.add("new-todo");
-  createNewTodo.append(createNewDltBtn);
-
-  todoField.append(createNewTodo);
+function newTodo(txtValue) {
+  const templateClone = template.content.cloneNode(true);
+  const li = templateClone.getElementById("todo-txt-field");
+  li.innerText = txtValue;
+  todoField.append(templateClone);
   txtArea.value = "";
+  saveTodo(txtValue);
+}
+
+function saveTodo() {
+  localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(STORE));
+  deleteTodo();
+}
+
+function loadTodo() {
+  let savedTodo = localStorage.getItem(LOCAL_STORAGE_KEY);
+  return JSON.parse(savedTodo) || [];
 }
 
 function deleteTodo() {
