@@ -70,6 +70,12 @@ function deleteTodo() {
   deleteBtn.forEach((button) => {
     button.addEventListener("click", () => {
       button.parentElement.classList.add("hide");
+
+      let parent = button.closest(".new-todo");
+      console.log(parent);
+      todoId = parent.dataset.todoId;
+      STORE = STORE.filter((dlt) => dlt.id !== todoId);
+      saveTodo();
     });
   });
 }
