@@ -2,35 +2,57 @@ const txtArea = document.getElementById("text-box");
 const todoField = document.getElementById("todo-field");
 const form = document.getElementById("todo-form");
 const template = document.querySelector("template");
-const LOCAL_STORAGE_KEY = "TODO_LIST";
+let LOCAL_STORAGE_KEY = "TODO_LIST";
 
-const STORE = loadTodo();
+//Load Todos from local storage
+let STORE = loadTodo();
 STORE.forEach(newTodo);
 
-form.addEventListener("submit", createTodo);
-
-function createTodo(e) {
+form.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  /*Stop if no string enter*/
-  let txtValue = txtArea.value;
-  let todoText = txtValue.trim();
+  let todo = {
+    todoText: txtArea.value,
+    complete: false,
+    id: new Date().valueOf().toString(),
+  };
+
+  //Stop if no string enter
+  let todoText = todo.todoText.trim();
   if (todoText.length === 0) {
     return;
   }
-  newTodo(txtValue);
-  STORE.push(txtValue);
+
+  STORE.push(todo);
+
+  newTodo(todo);
   saveTodo();
   deleteTodo();
-}
+});
 
-function newTodo(txtValue) {
+todoField.addEventListener("change", (e) => {
+  if (!e.target.matches("#check-box")) return;
+
+  const parent = e.target.closest(".new-todo");
+  let todoId = parent.dataset.todoId;
+  let todo = STORE.find((t) => t.id === todoId);
+  todo.complete = e.target.checked;
+  saveTodo();
+});
+
+function newTodo(todo) {
   const templateClone = template.content.cloneNode(true);
-  const li = templateClone.getElementById("todo-txt-field");
-  li.innerText = txtValue;
+  const listItem = templateClone.querySelector(".new-todo");
+  const textElement = templateClone.getElementById("todo-txt-field");
+  const checkbox = templateClone.getElementById("check-box");
+
+  listItem.dataset.todoId = todo.id;
+  textElement.innerText = todo.todoText;
+  checkbox.checked = todo.complete;
   todoField.append(templateClone);
   txtArea.value = "";
-  saveTodo(txtValue);
+  saveTodo(todo);
+  deleteTodo();
 }
 
 function saveTodo() {
