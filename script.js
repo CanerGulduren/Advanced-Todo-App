@@ -4,27 +4,23 @@ const form = document.getElementById("todo-form");
 const template = document.querySelector("template");
 let LOCAL_STORAGE_KEY = "TODO_LIST";
 
-//Load Todos from local storage
+
 let STORE = loadTodo();
 STORE.forEach(newTodo);
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
-
+  
   let todo = {
     todoText: txtArea.value,
     complete: false,
     id: new Date().valueOf().toString(),
   };
 
-  //Stop if no string enter
   let todoText = todo.todoText.trim();
-  if (todoText.length === 0) {
-    return;
-  }
-
+  if (todoText.length === 0) return
+  
   STORE.push(todo);
-
   newTodo(todo);
   saveTodo();
   deleteTodo();
@@ -72,7 +68,6 @@ function deleteTodo() {
       button.parentElement.classList.add("hide");
 
       let parent = button.closest(".new-todo");
-      console.log(parent);
       todoId = parent.dataset.todoId;
       STORE = STORE.filter((dlt) => dlt.id !== todoId);
       saveTodo();

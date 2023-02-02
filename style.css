@@ -9,9 +9,9 @@
 }
 
 :root{
-    --primary-light-color: rgb(133, 74, 181);
-    --primary-dark-color: rgb(42, 36, 48);
-    --secondary-light-color: rgb(247, 254, 23);
+    --primary-light-color: #42c3bf;
+    --primary-dark-color: #181d42;
+    --secondary-light-color: #fc7522;
     --secondary-dark-color: #A2B29F;
     --text-color-light: #fff;
 }
@@ -22,10 +22,12 @@ picture{
     display: block;
 }
 
+.cursor-pointer:hover{
+    cursor: pointer;
+}
 
 body{
     height: 100vh;
-    background-color:var(--primary-light-color);
     color: #fff;
 }
 
@@ -40,24 +42,59 @@ body{
 /*Nav*/
 
 nav{
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    height: 35vh;
-    background-color: var(--primary-dark-color);
+    display: grid;
+    justify-items: center;
+    height: 45vh;
+    grid-template-rows: 2fr 1fr;
+    position: relative;
+    background: linear-gradient(black, var(--primary-dark-color));
+}
+
+.bg-main-img{
+    background: url("img/note.png");
+    width: min(75vw, 22rem);
+    height: 100%;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+nav form{
+    align-self: flex-end;
+    margin-bottom: 1.2rem;
 }
 
 nav input[type = text]{
     width: min(90vw, 45rem);
     height: 3.5rem;
-    margin-bottom: 1rem;
+    border: 2px solid #333;
 }
 
 /*Main*/
 
+main{
+    background:linear-gradient(to bottom, var(--primary-dark-color), var(--primary-light-color) );
+    height: 100vh;
+}
+
+.links{
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    padding: 1rem;
+}
+
+.links span{
+    border-bottom: 2px solid #fff;
+    padding: .5rem;
+    font-size: 1.1rem;
+}
+
 section{
     display: flex;
     justify-content: center;
+    align-items: flex-start;
+    margin-top: 1.5rem;
 }
 
 .todo-label{
@@ -65,10 +102,6 @@ section{
     justify-content: center;
     align-items: center;
     gap: .4rem;
-}
-
-.todo-label:hover{
-    cursor: pointer;
 }
 
 .new-todo{
@@ -94,14 +127,6 @@ section{
     height: 1rem;
     width: 1rem;
     justify-self: flex-end;
-}
-
-.new-dlt-btn:hover{
-    cursor: pointer;
-}
-
-#todo-field{
-    margin-top: 4rem;
 }
 
 .hide{

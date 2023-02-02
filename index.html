@@ -10,23 +10,42 @@
 </head>
 <body>
     <nav>
+        <div class="bg-main-img">
+        </div>
             <form id="todo-form">
         <input type="text" id="text-box" placeholder="create a task..." maxlength="55">
              </form>
     </nav>
 
     <main>
-        <section>
+        <div class="links">
+            <span class="cursor-pointer">On Going</span>
+            <span class="cursor-pointer">Complete</span>
+        </div>
+    
+        <section class="main-todo">
         <ul id="todo-field">
         </ul>
-    </section>
+        </section>
+
+        <section class="complete-todo">
+            <ul id="complete-todo-field">
+            </ul>
+        </section>
+            
+    
+
+
+        <ul class="complete-todo-field">
+        </ul>
+    
     </main>
     
     <template>
         <li class="new-todo">
-            <label class="todo-label">
+            <label class="todo-label cursor-pointer">
                 <input type="checkbox" id="check-box">
-                <span id="todo-txt-field"></span>
+                <span id="todo-txt-field" class="cursor-pointer"></span>
             </label>
             <img src="img/reject.png" class="new-dlt-btn" width="1rem" height="1rem">
         </li>  
