@@ -11,7 +11,7 @@
 :root{
     --primary-light-color: #42c3bf;
     --primary-dark-color: #181d42;
-    --secondary-light-color: #fc7522;
+    --secondary-light-color: #8ed0c6;
     --secondary-dark-color: #A2B29F;
     --text-color-light: #fff;
 }
@@ -73,9 +73,10 @@ nav input[type = text]{
     padding: 1rem;
 }
 
-.links span{
+.links button{
+    border: none;
     border-bottom: 2px solid #000;
-    padding: .5rem;
+    padding: 1rem;
     font-size: 1.1rem;
 }
 
@@ -104,6 +105,7 @@ section{
     width: min(90vw, 45rem);
     padding: 1rem;
     margin-bottom: .5rem;
+    border: 2px solid #333;
 }
 
 #check-box{
@@ -128,4 +130,8 @@ section{
     100%{
         opacity: 0;
     }
+}
+
+#complete-todo-field{
+    display: none;
 }

@@ -18,27 +18,23 @@
     </nav>
 
         <div class="links">
-            <span class="cursor-pointer">On Going</span>
-            <span class="cursor-pointer">Complete</span>
+            <button class="cursor-pointer" id="main-todo-btn">On Going</button>
+            <button class="cursor-pointer" id="complete-todo-btn">Complete</button>
         </div>
     
-        <section class="main-todo">
-        <ul id="todo-field">
-        </ul>
-        </section>
+        <main>
+            <section class="main-todo">
+                <ul id="main-todo-field">
+                </ul>
+                </section>
+        
+                <section class="complete-todo">
+                    <ul id="complete-todo-field">
+                    </ul>
+                </section>
+        </main>
 
-        <section class="complete-todo">
-            <ul id="complete-todo-field">
-            </ul>
-        </section>
-            
-    
-
-
-        <ul class="complete-todo-field">
-        </ul>
-    
-    
+        
     <template>
         <li class="new-todo">
             <label class="todo-label cursor-pointer">
