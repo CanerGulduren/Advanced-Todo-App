@@ -16,10 +16,14 @@ window.addEventListener("DOMContentLoaded", completeTodoCount)
 completeTodoBtn.onclick = ()=>{
   completeTodoField.style.display = "block";
   mainTodoField.style.display = "none";
+  completeTodoBtn.style.borderBottom = "2px solid black"
+  mainTodoBtn.style.borderBottom = "none"
 }
 mainTodoBtn.onclick = ()=>{
   mainTodoField.style.display = "block";
   completeTodoField.style.display = "none";
+  mainTodoBtn.style.borderBottom = "2px solid black"
+  completeTodoBtn.style.borderBottom = "none"
 }
 LOCAL_STORE.forEach(newTodo);
 

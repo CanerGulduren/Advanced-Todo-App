@@ -87,6 +87,10 @@ section{
     position: relative;
 }
 
+#main-todo-btn{
+    border-bottom: 2px solid black;
+}
+
 #complete-todo-btn::after{
     content: attr(data-content);
     position: absolute;
