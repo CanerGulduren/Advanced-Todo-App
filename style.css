@@ -66,6 +66,13 @@ nav input[type = text]{
 
 /*Main*/
 
+section{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin-top: 1.5rem;
+}
+
 .links{
     display: flex;
     justify-content: center;
@@ -75,16 +82,17 @@ nav input[type = text]{
 
 .links button{
     border: none;
-    border-bottom: 2px solid #000;
     padding: 1rem;
     font-size: 1.1rem;
+    position: relative;
 }
 
-section{
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    margin-top: 1.5rem;
+#complete-todo-btn::after{
+    content: attr(data-content);
+    position: absolute;
+    top: 10px;
+    right: 5px;
+    font-size: .8rem;
 }
 
 .todo-label{

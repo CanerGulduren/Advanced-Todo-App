@@ -6,9 +6,12 @@ const form = document.getElementById("todo-form");
 const template = document.querySelector("template");
 let mainTodoBtn = document.getElementById("main-todo-btn");
 let completeTodoBtn = document.getElementById("complete-todo-btn");
+let completeCount = window.getComputedStyle(completeTodoBtn, "::after").getPropertyValue("content")
 let LOCAL_STORAGE_KEY = "TODO_LIST";
 let LOCAL_STORE = loadTodo();
 
+
+window.addEventListener("DOMContentLoaded", completeTodoCount)
 
 completeTodoBtn.onclick = ()=>{
   completeTodoField.style.display = "block";
@@ -40,8 +43,9 @@ allTodoFields.forEach((field) => {
     if (!e.target.matches("#check-box")) return;
     const box = e.target;
     completeTodo(box);
-    saveTodo();
     chooseAppendTodo(box.checked, box.closest(".new-todo"));
+    completeTodoCount()
+    saveTodo();
   });
 });
 
@@ -81,12 +85,21 @@ function deleteTodo() {
   deleteBtn.forEach((button) => {
     button.addEventListener("click", () => {
       let parent = button.closest(".new-todo");
-      todoId = parent.dataset.todoId;
-      LOCAL_STORE = LOCAL_STORE.filter((dlt) => dlt.id !== todoId);
-      saveTodo();
       deleteAfterAnim(parent);
+      saveDeletedTodos(parent)
+      .then(()=>{
+        LOCAL_STORE = LOCAL_STORE.filter((dlt) => dlt.id !== todoId);
+        saveTodo();
+      })
     });
   });
+}
+
+function saveDeletedTodos(parent){
+  todoId = parent.dataset.todoId;
+  return new Promise((resolve)=>{
+    resolve(todoId)
+  })
 }
 
 function completeTodo(box) {
@@ -98,7 +111,15 @@ function completeTodo(box) {
 
 function deleteAfterAnim(element) {
   element.classList.add("hide");
-  setTimeout(() => {
-    element.remove();
-  }, 300);
+    setTimeout(() => {
+      element.remove();
+      completeTodoCount()
+    }, 300)
+
+}
+
+function completeTodoCount(){
+  let child = Array.from(completeTodoField.children)
+  let count = child.length
+  completeTodoBtn.dataset.content = count
 }
