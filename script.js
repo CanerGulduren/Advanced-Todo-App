@@ -14,17 +14,12 @@ let LOCAL_STORE = loadTodo();
 window.addEventListener("DOMContentLoaded", completeTodoCount)
 
 completeTodoBtn.onclick = ()=>{
-  completeTodoField.style.display = "block";
-  mainTodoField.style.display = "none";
-  completeTodoBtn.style.borderBottom = "2px solid black"
-  mainTodoBtn.style.borderBottom = "none"
+  switchTodoField([completeTodoField, completeTodoBtn], [mainTodoField, mainTodoBtn])
 }
 mainTodoBtn.onclick = ()=>{
-  mainTodoField.style.display = "block";
-  completeTodoField.style.display = "none";
-  mainTodoBtn.style.borderBottom = "2px solid black"
-  completeTodoBtn.style.borderBottom = "none"
+  switchTodoField([mainTodoField, mainTodoBtn],[completeTodoField, completeTodoBtn])
 }
+
 LOCAL_STORE.forEach(newTodo);
 
 form.addEventListener("submit", (e) => {
@@ -52,6 +47,14 @@ allTodoFields.forEach((field) => {
     saveTodo();
   });
 });
+
+
+function switchTodoField([showField, showBtn], [hideField, hideBtn]){
+  showField.style.display = "block";
+  showBtn.style.borderBottom = "2px solid black"
+  hideField.style.display = "none";
+  hideBtn.style.borderBottom = "none"
+}
 
 function newTodo(todo) {
   const templateClone = template.content.cloneNode(true);
@@ -119,7 +122,6 @@ function deleteAfterAnim(element) {
       element.remove();
       completeTodoCount()
     }, 300)
-
 }
 
 function completeTodoCount(){
